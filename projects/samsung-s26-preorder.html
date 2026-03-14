@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samsung Galaxy S26 Pre-Order — Wai Kin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#1C6BEB;
+  --accent-light:#EBF3FF;
+  --accent-2:#1428A0;
+  --bg:#F7F8FA;--surface:#FFFFFF;
+  --ink:#0D1117;--muted:#6B7280;--light:#9CA3AF;
+  --border:rgba(0,0,0,0.07);
+  --r:16px;--rf:999px;
+  --sh:0 20px 60px rgba(0,0,0,0.09);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+  padding:0 clamp(20px,5vw,80px);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(247,248,250,0.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.125rem;color:var(--ink);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-r{display:flex;align-items:center;gap:12px}
+.nav-num{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 12px;border-radius:var(--rf);
+  background:var(--accent-light);color:var(--accent);border:1px solid var(--accent);opacity:.7;
+}
+.btn-back{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:var(--rf);
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--muted);font-size:.8125rem;font-weight:600;
+  text-decoration:none;transition:all .2s;
+}
+.btn-back:hover{color:var(--ink);border-color:var(--accent);background:var(--accent-light)}
+
+/* HERO */
+.hero{
+  padding-top:64px;min-height:88vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=1600&q=85&fit=crop') center/cover;
+}
+/* Samsung-brand gradient overlay */
+.hero-veil{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    135deg,
+    rgba(28,107,235,0.6) 0%,
+    rgba(20,40,160,0.5) 40%,
+    rgba(13,17,23,0.92) 100%
+  );
+}
+/* Subtle grid texture */
+.hero-grid{
+  position:absolute;inset:0;z-index:2;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+.hero-body{
+  position:relative;z-index:3;
+  padding:0 clamp(20px,8vw,140px) 72px;
+  max-width:1100px;
+}
+.hero-num{
+  position:absolute;right:clamp(20px,6vw,100px);bottom:48px;
+  font-family:'DM Serif Display',serif;font-size:9rem;line-height:1;
+  color:var(--accent);opacity:.12;pointer-events:none;z-index:3;
+  letter-spacing:-.04em;
+}
+.htags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.htag{
+  padding:4px 14px;border-radius:var(--rf);
+  font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px);
+}
+.hero-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.4rem,5.5vw,4.8rem);
+  line-height:1.04;letter-spacing:-.025em;color:#fff;margin-bottom:14px;
+}
+.hero-tagline{
+  font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(255,255,255,.6);
+  max-width:580px;line-height:1.65;margin-bottom:32px;
+}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap}
+.meta-item .ml{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px}
+.meta-item .mv{font-size:.9375rem;font-weight:600;color:rgba(255,255,255,.8)}
+
+/* METRICS */
+.metrics{
+  background:var(--ink);
+  padding:clamp(48px,6vw,80px) clamp(20px,8vw,140px);
+}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06)}
+.metric-card{
+  background:var(--ink);padding:36px 28px;text-align:center;
+  transition:background .25s;
+}
+.metric-card:hover{background:rgba(255,255,255,.04)}
+.metric-val{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  color:var(--accent);display:block;margin-bottom:8px;line-height:1;
+}
+.metric-lbl{font-size:.875rem;color:rgba(255,255,255,.4);font-weight:500;line-height:1.4}
+
+/* CONTENT */
+.section{padding:clamp(60px,7vw,100px) clamp(20px,8vw,140px)}
+.section-alt{background:var(--surface)}
+.section-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;
+}
+.section-label::before{content:'';display:block;width:18px;height:2px;background:var(--accent);border-radius:2px;flex-shrink:0}
+
+/* TWO-COL */
+.two-col{display:grid;grid-template-columns:300px 1fr;gap:60px;align-items:start}
+.col-label-block{position:sticky;top:84px}
+.big-label{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-.02em;
+  color:var(--ink);line-height:1.1;
+}
+.col-body p{
+  font-size:1.0625rem;color:var(--muted);line-height:1.8;margin-bottom:24px;
+}
+.col-body p:last-child{margin-bottom:0}
+.col-body strong{color:var(--ink);font-weight:600}
+
+/* FINDINGS — special callout cards */
+.findings-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-top:8px;
+}
+.finding-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 26px;
+  position:relative;overflow:hidden;
+  transition:transform .25s, box-shadow .25s, border-color .25s;
+}
+.finding-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--accent);
+}
+.finding-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--sh);
+  border-color:var(--accent);
+}
+.finding-num{
+  font-family:'DM Serif Display',serif;
+  font-size:2.5rem;color:var(--accent);opacity:.15;
+  line-height:1;margin-bottom:12px;
+}
+.finding-title{
+  font-size:1rem;font-weight:700;color:var(--ink);
+  margin-bottom:10px;line-height:1.35;
+}
+.finding-body{font-size:.9rem;color:var(--muted);line-height:1.7}
+.finding-insight{
+  margin-top:16px;padding:12px 14px;
+  background:var(--accent-light);border-radius:10px;
+  border-left:3px solid var(--accent);
+  font-size:.8125rem;color:var(--accent);font-weight:600;line-height:1.5;
+}
+
+/* JOURNEY VIZ */
+.journey-viz{
+  display:flex;align-items:center;gap:0;
+  margin:32px 0;flex-wrap:nowrap;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 32px;overflow-x:auto;
+}
+.journey-step{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;min-width:130px;
+}
+.journey-step-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--accent-light);border:2px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:10px;
+  transition:transform .2s;
+}
+.journey-step:hover .journey-step-icon{transform:scale(1.1)}
+.journey-step-name{font-size:.875rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.journey-step-sub{font-size:.75rem;color:var(--muted)}
+.journey-arrow{
+  flex:1;min-width:20px;height:2px;
+  background:linear-gradient(90deg,var(--accent) 0%,rgba(28,107,235,.2) 100%);
+  position:relative;margin-bottom:28px;
+}
+.journey-arrow::after{
+  content:'';position:absolute;right:-1px;top:-4px;
+  border:5px solid transparent;border-left-color:var(--accent);
+}
+
+/* PULLQUOTE */
+.pullquote{
+  border-left:4px solid var(--accent);padding-left:28px;
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.3rem,2.5vw,1.875rem);
+  color:var(--ink);line-height:1.5;font-style:italic;
+  margin-bottom:32px;
+}
+
+/* CHIPS */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chip{
+  padding:5px 14px;border-radius:var(--rf);
+  font-size:.8125rem;font-weight:600;
+  background:var(--accent-light);color:var(--accent);
+  border:1px solid;border-color:rgba(28,107,235,.25);
+}
+
+/* OPPORTUNITIES */
+.opps-list{display:flex;flex-direction:column;gap:16px;margin-top:12px}
+.opp-item{
+  display:grid;grid-template-columns:48px 1fr;gap:20px;
+  align-items:start;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;
+  transition:border-color .25s, background .25s;
+  opacity:0;
+  transform:translateX(-20px);
+}
+.opp-item:hover{border-color:var(--accent);background:var(--accent-light)}
+.opp-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--accent-light);border:1px solid rgba(28,107,235,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;flex-shrink:0;
+}
+.opp-title{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.opp-body{font-size:.9375rem;color:var(--muted);line-height:1.65}
+
+/* LEARNINGS */
+.learnings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.learning-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 26px;
+  /* opacity:0;transform:translateY(24px); */
+  transition:border-color .25s, background .25s, box-shadow .25s;
+}
+.learning-card:hover{border-color:var(--accent);background:var(--accent-light);transform:translateY(-3px);box-shadow:var(--sh)}
+.learning-text{font-size:.9375rem;color:var(--muted);line-height:1.7}
+
+.divider{height:1px;background:var(--border);margin:0 clamp(20px,8vw,140px)}
+
+/* NEXT */
+.next-band{
+  background:var(--ink);
+  padding:clamp(56px,6vw,90px) clamp(20px,8vw,140px);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:24px;
+}
+.next-l .nl{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px}
+.next-l .nt{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.8rem);color:#fff;letter-spacing:-.02em}
+.btn-next{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 32px;border-radius:var(--rf);
+  background:var(--accent);color:#fff;
+  font-family:'Outfit',sans-serif;font-size:.9375rem;font-weight:700;
+  text-decoration:none;flex-shrink:0;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 24px rgba(0,0,0,.3);
+}
+.btn-next:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+
+.reveal{opacity:0;transform:translateY(24px)}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:3px}
+
+@media(max-width:860px){
+  .two-col{grid-template-columns:1fr;gap:32px}
+  .col-label-block{position:static}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .findings-grid{grid-template-columns:1fr}
+  .learnings-grid{grid-template-columns:1fr}
+  .journey-viz{padding:20px}
+}
+@media(max-width:560px){
+  .hero-meta{gap:18px}
+  .next-band{flex-direction:column;align-items:flex-start}
+  .opp-item{grid-template-columns:1fr}
+  .opp-icon{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Wai<span>Kin</span></a>
+  <div class="nav-r">
+    <span class="nav-num">09 / 9</span>
+    <a href="../index.html" class="btn-back">
+      <iconify-icon icon="ph:arrow-left-bold"></iconify-icon>
+      All Work
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-body">
+    <div class="htags">
+      <span class="htag">UX Research</span>
+      <span class="htag">Behavioral Analytics</span>
+      <span class="htag">E-Commerce</span>
+      <span class="htag">Heatmap Analysis</span>
+      <span class="htag">Conversion Optimisation</span>
+    </div>
+    <h1 class="hero-title">Samsung Galaxy S26<br>Pre-Order Experience</h1>
+    <p class="hero-tagline">Optimising the device installment purchase journey through behavioral analytics and UX research</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="ml">Role</div>
+        <div class="mv">UX/UI Designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="ml">Focus</div>
+        <div class="mv">Behavioral Analysis · UX Research</div>
+      </div>
+      <div class="meta-item">
+        <div class="ml">Platform</div>
+        <div class="mv">Web · Mobile</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-num">12</div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="metric-val" data-target="1748" data-suffix="">0</span>
+      <span class="metric-lbl">Successful preorders analysed</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val" data-target="13" data-suffix="–15%">0–15%</span>
+      <span class="metric-lbl">Checkout failure rate identified</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val" data-target="60" data-suffix="%+">0%+</span>
+      <span class="metric-lbl">Interaction density at verification step</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val" data-target="5" data-suffix="">0</span>
+      <span class="metric-lbl">Key UX opportunities identified</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="section section-alt reveal">
+  <div class="two-col">
+    <div class="col-label-block">
+      <span class="section-label">Introduction</span>
+      <h2 class="big-label">The project</h2>
+    </div>
+    <div class="col-body">
+      <p>During the launch of the Samsung Galaxy S26 preorder campaign, I analysed the online purchase journey to understand how users interact with the device installment flow and where friction was occurring.</p>
+      <p>The preorder process spans multiple steps — product exploration, identity verification, and plan selection — before a user reaches checkout. While the flow was functional, the team wanted to understand how users <strong>actually behave</strong> during preorder events, and whether targeted UX improvements could reduce friction and increase successful orders.</p>
+      <p>This case study walks through the behavioral analysis, key findings, and UX opportunities that came out of that work.</p>
+
+      <!-- USER JOURNEY VIZ -->
+      <div class="journey-viz">
+        <div class="journey-step">
+          <div class="journey-step-icon">
+            <iconify-icon icon="ph:device-mobile-bold" style="color:#1C6BEB"></iconify-icon>
+          </div>
+          <div class="journey-step-name">Product Page</div>
+          <div class="journey-step-sub">Device explore</div>
+        </div>
+        <div class="journey-arrow"></div>
+        <div class="journey-step">
+          <div class="journey-step-icon">
+            <iconify-icon icon="ph:shield-check-bold" style="color:#1C6BEB"></iconify-icon>
+          </div>
+          <div class="journey-step-name">Verification</div>
+          <div class="journey-step-sub">Identity check</div>
+        </div>
+        <div class="journey-arrow"></div>
+        <div class="journey-step">
+          <div class="journey-step-icon">
+            <iconify-icon icon="ph:list-checks-bold" style="color:#1C6BEB"></iconify-icon>
+          </div>
+          <div class="journey-step-name">Plan Selection</div>
+          <div class="journey-step-sub">Choose plan</div>
+        </div>
+        <div class="journey-arrow"></div>
+        <div class="journey-step">
+          <div class="journey-step-icon">
+            <iconify-icon icon="ph:bag-bold" style="color:#1C6BEB"></iconify-icon>
+          </div>
+          <div class="journey-step-name">Checkout</div>
+          <div class="journey-step-sub">Complete order</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MY ROLE -->
+<section class="section reveal">
+  <div class="two-col">
+    <div class="col-label-block">
+      <span class="section-label">My Role</span>
+      <h2 class="big-label">What I did</h2>
+    </div>
+    <div class="col-body">
+      <p>I was the UX/UI Designer responsible for the research and analysis phase of this project. My work covered the full analytical process — from pulling and interpreting behavioral data, to translating findings into concrete UX recommendations for stakeholders.</p>
+      <p>Specifically, I was responsible for: conducting UX research and behavioral analysis, interpreting heatmap and interaction pattern data, identifying friction points across each stage of the journey, mapping those findings to UX improvement opportunities, and presenting the full picture to the product and business teams.</p>
+      <div class="chips">
+        <span class="chip">Heatmap Analysis</span>
+        <span class="chip">Funnel Analytics</span>
+        <span class="chip">UX Research</span>
+        <span class="chip">Stakeholder Presentation</span>
+        <span class="chip">Journey Mapping</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHALLENGES -->
+<section class="section section-alt reveal">
+  <div class="two-col">
+    <div class="col-label-block">
+      <span class="section-label">Challenges</span>
+      <h2 class="big-label">What made it hard</h2>
+    </div>
+    <div class="col-body">
+      <p>Preorder users behave very differently from typical online shoppers. They arrive with strong purchase intent — they already know what they want and their primary goal is to complete the transaction quickly. This means that usability problems that might go unnoticed in a browsing context become significant friction points in a preorder flow.</p>
+      <p>The challenge of this project was that <strong>the flow wasn't broken — it was just creating unnecessary friction</strong>. There were no error pages or dead ends. The problems were subtler: cognitive overload at the plan selection step, hesitation at the identity verification stage, and users struggling to quickly locate the purchase action on a content-heavy product page.</p>
+      <p>Identifying these kinds of friction requires reading behavioral data carefully, not just looking at drop-off rates. A user who completes a purchase despite confusion is still a user who was close to abandoning.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW I DID IT — KEY FINDINGS -->
+<section class="section reveal">
+  <div class="two-col">
+    <div class="col-label-block">
+      <span class="section-label">Approach</span>
+      <h2 class="big-label">How I did it</h2>
+    </div>
+    <div class="col-body">
+      <p>I combined three data sources to build a full picture of user behavior: click heatmaps, scroll behavior analytics, and order funnel data covering successful and failed checkout attempts. Layering these together let me connect what users were doing visually with what was actually happening to conversions.</p>
+      <p>From that analysis, five clear behavioral patterns emerged:</p>
+    </div>
+  </div>
+
+  <!-- FINDINGS CARDS — full width below -->
+  <div class="findings-grid" style="margin-top:48px">
+
+    <div class="finding-card reveal">
+      <div class="finding-num">01</div>
+      <div class="finding-title">Product imagery drives the most engagement</div>
+      <div class="finding-body">Heatmaps showed heavy interaction with the device image gallery and thumbnails — even among users who already intended to buy. Users explored multiple device angles before continuing to purchase, using visuals as confidence-building confirmation rather than discovery.</div>
+      <div class="finding-insight">Even high-intent users rely on visuals to confirm their choice. Imagery is transactional, not just marketing.</div>
+    </div>
+
+    <div class="finding-card reveal">
+      <div class="finding-num">02</div>
+      <div class="finding-title">Promotional content is largely skipped</div>
+      <div class="finding-body">Sections highlighting preorder offers and benefits received significantly lower engagement than pricing and CTA areas. Users scrolled past promotional blocks quickly, moving directly to purchase-related content. Preorder customers prioritise transaction completion over marketing consumption.</div>
+      <div class="finding-insight">Promotional content should communicate value in a glance — if it requires reading, preorder users won't read it.</div>
+    </div>
+
+    <div class="finding-card reveal">
+      <div class="finding-num">03</div>
+      <div class="finding-title">Colour selection receives minimal interaction</div>
+      <div class="finding-body">The colour selector on the product page showed relatively low engagement. Users appeared to either accept the default or deprioritise customisation entirely in favour of completing the purchase. Speed mattered more than personalisation at this stage.</div>
+      <div class="finding-insight">For preorder flows, the UI should optimise for efficiency over customisation depth.</div>
+    </div>
+
+    <div class="finding-card reveal">
+      <div class="finding-num">04</div>
+      <div class="finding-title">Identity verification is the most interaction-dense step</div>
+      <div class="finding-body">Over 60% of user interaction on the verification page was concentrated on four elements: the mobile number field, identity number field, terms checkbox, and verify button. Users were highly task-focused here — but the requirement to provide personal data introduced trust-related hesitation.</div>
+      <div class="finding-insight">This step needs to feel fast, secure, and trustworthy. Any ambiguity here translates directly to drop-off.</div>
+    </div>
+
+    <div class="finding-card reveal" style="grid-column:span 2">
+      <div class="finding-num">05</div>
+      <div class="finding-title">Plan selection introduces significant cognitive load</div>
+      <div class="finding-body">After verification, users reached a plan selection page presenting roaming passes, trade-in offers, device protection plans, and add-ons — all stacked vertically and presented simultaneously. Heatmap patterns showed users skimming through most of these sections rather than engaging. This is classic decision fatigue: too many choices presented at once slows users down and increases the chance of abandonment.</div>
+      <div class="finding-insight">Restructuring this step to present the primary plan decision first — and treat add-ons as secondary — would reduce cognitive load and keep users moving toward checkout.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OUTCOME -->
+<section class="section section-alt reveal">
+  <div class="two-col">
+    <div class="col-label-block">
+      <span class="section-label">Outcome</span>
+      <h2 class="big-label">The result</h2>
+    </div>
+    <div class="col-body">
+      <p class="pullquote">The analysis identified a 13–15% checkout failure rate and five concrete UX opportunities that directly informed how the team approached future preorder and device launch experiences.</p>
+      <p>The findings informed team discussions around simplifying the plan selection UI, improving checkout efficiency, and rethinking how promotional content is structured within high-intent purchase flows. Four actionable recommendations came directly out of the research:</p>
+
+      <div class="opps-list" style="margin-top:28px">
+        <div class="opp-item">
+          <div class="opp-icon"><iconify-icon icon="ph:list-bold" style="color:#1C6BEB;font-size:1.25rem"></iconify-icon></div>
+          <div>
+            <div class="opp-title">Restructure plan selection to reduce cognitive load</div>
+            <div class="opp-body">Prioritise the recommended plan first, then surface optional add-ons progressively — so users complete the core decision before being asked to consider upgrades.</div>
+          </div>
+        </div>
+        <div class="opp-item">
+          <div class="opp-icon"><iconify-icon icon="ph:push-pin-bold" style="color:#1C6BEB;font-size:1.25rem"></iconify-icon></div>
+          <div>
+            <div class="opp-title">Introduce a persistent purchase CTA</div>
+            <div class="opp-body">A sticky bar showing the device name and monthly price would let users resume the purchase flow without having to scroll back up to find the button.</div>
+          </div>
+        </div>
+        <div class="opp-item">
+          <div class="opp-icon"><iconify-icon icon="ph:seal-check-bold" style="color:#1C6BEB;font-size:1.25rem"></iconify-icon></div>
+          <div>
+            <div class="opp-title">Add trust-building microcopy at verification</div>
+            <div class="opp-body">Brief, clear copy explaining why each field is required and how long the process takes removes hesitation at the most interaction-dense step. Something as simple as <em>"Used only to verify installment eligibility — takes under 10 seconds"</em> can meaningfully reduce abandonment.</div>
+          </div>
+        </div>
+        <div class="opp-item">
+          <div class="opp-icon"><iconify-icon icon="ph:star-bold" style="color:#1C6BEB;font-size:1.25rem"></iconify-icon></div>
+          <div>
+            <div class="opp-title">Label recommended plans to guide decisions</div>
+            <div class="opp-body">When multiple plans are available, a "Most Popular" or "Best Value" label gives users a clear anchor — reducing decision time and increasing confidence in the choice they make.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KEY LEARNINGS -->
+<section class="section reveal">
+  <span class="section-label">Key Learnings</span>
+  <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.02em;color:var(--ink);margin-bottom:32px;line-height:1.1">What this taught me</h2>
+  <div class="learnings-grid">
+    <div class="learning-card">
+      <p class="learning-text"><strong>Preorder users are not browsers.</strong> They arrive with purchase intent and want to complete a transaction, not explore a product. Designing for this means prioritising speed and clarity over content richness — even if the marketing team wants more promotional surface area.</p>
+    </div>
+    <div class="learning-card">
+      <p class="learning-text"><strong>Behavioral data reveals what users do, not what they say.</strong> The heatmap analysis showed patterns that no user interview would surface — like the fact that colour selection was being ignored entirely. Real interaction data is irreplaceable for understanding high-intent, time-pressured flows.</p>
+    </div>
+    <div class="learning-card">
+      <p class="learning-text"><strong>Friction compounds in linear flows.</strong> In a journey where every step must be completed in sequence, each point of hesitation adds up. A small moment of confusion at verification, followed by cognitive overload at plan selection, is enough to tip a high-intent user into abandonment. Every step in a checkout flow needs to earn its place.</p>
+    </div>
+    <div class="learning-card">
+      <p class="learning-text"><strong>UX research without design authority still creates value.</strong> This project was analytical, not executional — I wasn't designing the solutions, I was identifying the problems. Learning to package insights clearly and persuasively for stakeholders is a skill as important as the design craft itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<div class="next-band">
+  <div class="next-l">
+    <div class="nl">Back to the beginning</div>
+    <div class="nt">CelcomDigi Consumer App</div>
+  </div>
+  <a href="celcomdigi-consumer-app.html" class="btn-next">
+    View Project
+    <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+  </a>
+</div>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance
+  gsap.timeline({delay:0.15})
+    .from('.htags',      {opacity:0, y:18, duration:0.6, ease:'power3.out'})
+    .from('.hero-title', {opacity:0, y:36, duration:0.9, ease:'power3.out'}, '-=0.35')
+    .from('.hero-tagline',{opacity:0, y:20, duration:0.7, ease:'power3.out'}, '-=0.5')
+    .from('.meta-item',  {opacity:0, y:14, stagger:0.1, duration:0.5, ease:'power3.out'}, '-=0.4')
+    .from('.hero-num',   {opacity:0, x:40, duration:1.1, ease:'power3.out'}, '-=0.8');
+
+  // Metric counters
+  document.querySelectorAll('.metric-val').forEach(el => {
+    const raw   = el.textContent.trim();
+    const match = raw.match(/[\d]+/);
+    if(!match) return;
+    const num    = parseInt(match[0]);
+    const before = raw.slice(0, raw.indexOf(match[0]));
+    const after  = raw.slice(raw.indexOf(match[0]) + match[0].length);
+    el.textContent = before + '0' + after;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 92%',
+      onEnter: () => {
+        const obj = {val:0};
+        gsap.to(obj, {
+          val:num, duration:1.6, ease:'power2.out',
+          onUpdate: () => { el.textContent = before + Math.round(obj.val) + after; }
+        });
+      }
+    });
+  });
+
+  // Scroll reveals
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.to(el, {
+      opacity:1, y:0, duration:0.85, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 88%', toggleActions:'play none none none'}
+    });
+  });
+
+  // Journey steps entrance
+  ScrollTrigger.create({
+    trigger:'.journey-viz', start:'top 88%',
+    onEnter:() => {
+      gsap.from('.journey-step', {opacity:0, y:20, stagger:0.12, duration:0.6, ease:'power3.out'});
+      gsap.from('.journey-arrow',{opacity:0, scaleX:0, stagger:0.12, duration:0.5, ease:'power2.out', transformOrigin:'left center'});
+    }
+  });
+
+  // Finding cards stagger
+  ScrollTrigger.create({
+    trigger:'.findings-grid', start:'top 85%',
+    onEnter:() => {
+      gsap.from('.finding-card', {opacity:0, y:28, stagger:0.1, duration:0.7, ease:'power3.out'});
+    }
+  });
+
+  // Opportunity items stagger
+  ScrollTrigger.create({
+    trigger:'.opps-list', start:'top 85%',
+    onEnter:() => {
+      gsap.to('.opp-item', {opacity:1, x:0, stagger:0.12, duration:0.65, ease:'power3.out'});
+    }
+  });
+
+  // Learning cards
+  // ScrollTrigger.create({
+  //   trigger:'.learnings-grid', start:'top 85%',
+  //   onEnter:() => {
+  //     gsap.to('.learning-card', {opacity:0, y:24, stagger:0.1, duration:0.7, ease:'power3.out'});
+  //   }
+  // });
+</script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects — Wai Kin Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#F7F8FA;--surface:#FFFFFF;--ink:#0D1117;
+    --ink-muted:#6B7280;--ink-light:#9CA3AF;
+    --accent:#2563EB;--border:rgba(0,0,0,0.07);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md:0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg:0 20px 60px rgba(0,0,0,0.12);
+    --radius:16px;--radius-full:999px;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:0 clamp(20px,5vw,80px);height:64px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(247,248,250,0.9);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--ink);text-decoration:none}
+  .nav-logo span{color:var(--accent)}
+  .btn-back{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 18px;border-radius:var(--radius-full);
+    background:var(--surface);color:var(--ink-muted);
+    font-size:.8125rem;font-weight:600;text-decoration:none;
+    border:1px solid var(--border);transition:all .2s;
+  }
+  .btn-back:hover{color:var(--ink);border-color:var(--accent);background:#EFF6FF}
+
+  /* HEADER */
+  .page-header{
+    padding:120px clamp(20px,8vw,140px) 80px;
+    background:var(--ink);position:relative;overflow:hidden;
+  }
+  .header-shape{
+    position:absolute;border-radius:50%;filter:blur(80px);opacity:.1;
+  }
+  .header-shape-1{width:500px;height:500px;background:#2563EB;top:-100px;right:-100px}
+  .header-shape-2{width:300px;height:300px;background:#7C3AED;bottom:-80px;left:5%}
+  .header-inner{position:relative;z-index:1;max-width:600px}
+  .header-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.8125rem;font-weight:700;color:#93C5FD;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;
+  }
+  .header-eyebrow::before{content:'';display:block;width:20px;height:2px;background:#93C5FD;border-radius:2px}
+  .header-title{
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(2.5rem,6vw,5rem);
+    line-height:1.05;letter-spacing:-0.02em;
+    color:#fff;margin-bottom:20px;
+  }
+  .header-title .italic{font-style:italic;color:#93C5FD}
+  .header-sub{font-size:1.125rem;color:rgba(255,255,255,.5);line-height:1.7}
+
+  /* FILTER */
+  .filter-bar{
+    padding:28px clamp(20px,8vw,140px);
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  }
+  .filter-label{font-size:.8125rem;font-weight:700;color:var(--ink-muted);letter-spacing:.06em;text-transform:uppercase;margin-right:8px}
+  .filter-btn{
+    padding:6px 16px;border-radius:var(--radius-full);
+    font-size:.8125rem;font-weight:600;cursor:pointer;
+    border:1.5px solid var(--border);background:transparent;color:var(--ink-muted);
+    transition:all .2s;font-family:'Outfit',sans-serif;
+  }
+  .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:#EFF6FF}
+
+  /* GRID */
+  .projects-container{padding:60px clamp(20px,8vw,140px) 100px}
+  .projects-list{display:flex;flex-direction:column;gap:0}
+
+  /* PROJECT ROW */
+  .project-row{
+    display:grid;grid-template-columns:80px 1fr 2fr auto;
+    gap:32px;align-items:center;
+    padding:32px 0;border-bottom:1px solid var(--border);
+    text-decoration:none;color:inherit;
+    transition:background .2s;position:relative;
+    border-radius:12px;margin-bottom:0;
+  }
+  .project-row::before{
+    content:'';position:absolute;left:-24px;right:-24px;top:0;bottom:0;
+    background:var(--surface);border-radius:12px;
+    opacity:0;transition:opacity .25s;z-index:0;
+  }
+  .project-row:hover::before{opacity:1}
+  .project-row > *{position:relative;z-index:1}
+
+  .row-num{
+    font-family:'DM Serif Display',serif;
+    font-size:2rem;color:var(--ink-light);line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .row-img-wrap{
+    width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;
+    border:1px solid var(--border);box-shadow:var(--shadow-sm);
+  }
+  .row-img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .project-row:hover .row-img{transform:scale(1.06)}
+
+  .row-info{}
+  .row-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .row-tag{
+    padding:3px 10px;border-radius:var(--radius-full);
+    font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    background:#EFF6FF;color:#2563EB;border:1px solid #BFDBFE;
+  }
+  .row-title{
+    font-family:'DM Serif Display',serif;
+    font-size:1.5rem;color:var(--ink);margin-bottom:6px;letter-spacing:-0.01em;
+  }
+  .row-desc{font-size:.9rem;color:var(--ink-muted);line-height:1.6;max-width:400px}
+  .row-meta{display:flex;gap:16px;margin-top:12px}
+  .row-meta-item{font-size:.8rem;color:var(--ink-light);font-weight:500}
+
+  .row-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:var(--radius-full);
+    background:var(--ink);color:#fff;
+    font-size:.875rem;font-weight:600;
+    white-space:nowrap;
+    transition:transform .2s,box-shadow .2s,background .2s;
+    box-shadow:0 2px 8px rgba(13,17,23,0.15);
+  }
+  .project-row:hover .row-cta{transform:scale(1.04);box-shadow:0 4px 16px rgba(13,17,23,0.25)}
+
+  /* ACCENT DOTS */
+  .dot{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--accent-color,#2563EB);margin-right:2px;vertical-align:middle;
+  }
+
+  .reveal{opacity:0;transform:translateY(20px)}
+
+  ::-webkit-scrollbar{width:5px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:3px}
+
+  @media(max-width:900px){
+    .project-row{grid-template-columns:60px 1fr;grid-template-rows:auto auto auto;gap:16px}
+    .row-img-wrap{grid-column:span 2;aspect-ratio:16/7}
+    .row-info{grid-column:span 2}
+    .row-cta{grid-column:span 2;justify-content:center}
+  }
+  @media(max-width:600px){
+    .project-row{grid-template-columns:40px 1fr}
+    .filter-bar{padding:20px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Wai<span>Kin</span></a>
+  <a href="index.html" class="btn-back">
+    <iconify-icon icon="ph:arrow-left-bold"></iconify-icon>
+    Portfolio
+  </a>
+</nav>
+
+<div class="page-header">
+  <div class="header-shape header-shape-1"></div>
+  <div class="header-shape header-shape-2"></div>
+  <div class="header-inner">
+    <span class="header-eyebrow">Selected Work</span>
+    <h1 class="header-title">9 Projects.<br><span class="italic">All 9.</span></h1>
+    <p class="header-sub">10+ years of work across mobile apps, SaaS platforms, campaign microsites, and brand identities — for Malaysia's most recognised companies.</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Mobile App">Mobile App</button>
+  <button class="filter-btn" data-filter="SaaS">SaaS</button>
+  <button class="filter-btn" data-filter="Campaign">Campaign</button>
+  <button class="filter-btn" data-filter="E-Commerce">E-Commerce</button>
+  <button class="filter-btn" data-filter="Brand">Brand</button>
+  <button class="filter-btn" data-filter="Web">Web</button>
+</div>
+
+<div class="projects-container">
+  <div class="projects-list" id="projectsList">
+
+    <a class="project-row reveal" href="projects/celcomdigi-consumer-app.html"
+       data-categories="Mobile App">
+      <div class="row-num">01</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80&fit=crop" alt="CelcomDigi Consumer App" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag">Mobile App</span>
+          <span class="row-tag">UX Design</span>
+          <span class="row-tag">Design System</span>
+        </div>
+        <div class="row-title">CelcomDigi Consumer App</div>
+        <div class="row-desc">Unified post-merger mobile experience for 20.3M subscribers — Malaysia's largest telco product.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Figma · Overflow · Maze</span>
+          <span class="row-meta-item">18 months</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/althr.html"
+       data-categories="SaaS Web">
+      <div class="row-num">02</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&fit=crop" alt="altHR" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#F5F3FF;color:#7C3AED;border-color:#DDD6FE">SaaS</span>
+          <span class="row-tag" style="background:#F5F3FF;color:#7C3AED;border-color:#DDD6FE">HR Tech</span>
+          <span class="row-tag" style="background:#F5F3FF;color:#7C3AED;border-color:#DDD6FE">B2B Design</span>
+        </div>
+        <div class="row-title">altHR by DigiX</div>
+        <div class="row-desc">One-stop HR platform with 10 modules covering payroll, recruitment, and performance management.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Figma · SaaS</span>
+          <span class="row-meta-item">12 months</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/celcomdigi-dealer-app.html"
+       data-categories="Mobile App">
+      <div class="row-num">03</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&q=80&fit=crop" alt="CelcomDigi Dealer App" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#ECFEFF;color:#0891B2;border-color:#A5F3FC">Mobile App</span>
+          <span class="row-tag" style="background:#ECFEFF;color:#0891B2;border-color:#A5F3FC">B2B</span>
+          <span class="row-tag" style="background:#ECFEFF;color:#0891B2;border-color:#A5F3FC">Dealer Network</span>
+        </div>
+        <div class="row-title">CelcomDigi Dealer App</div>
+        <div class="row-desc">Unified B2B mobile tool for 6,200+ active dealer users across Malaysia's retail network.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Figma · Overflow · Maze</span>
+          <span class="row-meta-item">10 months</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/jobstreet-career-advice.html"
+       data-categories="Web Campaign">
+      <div class="row-num">04</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80&fit=crop" alt="Jobstreet Career Advice" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA">Web</span>
+          <span class="row-tag" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA">Gamification</span>
+          <span class="row-tag" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA">HTML Dev</span>
+        </div>
+        <div class="row-title">Jobstreet Career Advice</div>
+        <div class="row-desc">Gamified interactive career guidance experience achieving 4.2× engagement vs static articles.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Adobe AI · HTML · CSS</span>
+          <span class="row-meta-item">4 months</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/uniqlo-kembara-kampung.html"
+       data-categories="Campaign Web">
+      <div class="row-num">05</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=600&q=80&fit=crop" alt="UNIQLO Kembara Kampung" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#F0FDF4;color:#16A34A;border-color:#BBF7D0">Campaign</span>
+          <span class="row-tag" style="background:#F0FDF4;color:#16A34A;border-color:#BBF7D0">Gamification</span>
+          <span class="row-tag" style="background:#F0FDF4;color:#16A34A;border-color:#BBF7D0">Vue.js</span>
+        </div>
+        <div class="row-title">UNIQLO Kembara Kampung</div>
+        <div class="row-desc">Raya 2022 maze game with leaderboards — 280K+ sessions and 4.1× return player rate.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Figma · Vue.js</span>
+          <span class="row-meta-item">8 weeks</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/zurich-iammore.html"
+       data-categories="Campaign Web">
+      <div class="row-num">06</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=600&q=80&fit=crop" alt="Zurich #IAmMore" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag">Campaign</span>
+          <span class="row-tag">Microsite</span>
+          <span class="row-tag">Laravel</span>
+        </div>
+        <div class="row-title">Zurich #IAmMore Campaign</div>
+        <div class="row-desc">COVID-19 story-sharing microsite — 340K visitors, 12,400+ stories, 3-layer content moderation.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Figma · Laravel · Animation</span>
+          <span class="row-meta-item">6 weeks</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/the-hub-oug.html"
+       data-categories="E-Commerce Web">
+      <div class="row-num">07</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80&fit=crop" alt="The Hub OUG" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A">E-Commerce</span>
+          <span class="row-tag" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A">WordPress</span>
+          <span class="row-tag" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A">Packaging</span>
+        </div>
+        <div class="row-title">The Hub OUG</div>
+        <div class="row-desc">Artisan coffee roaster e-commerce — 3.2× revenue growth, custom WooCommerce build.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Adobe AI · WordPress · WooCommerce</span>
+          <span class="row-meta-item">3 months</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/iclaudius-tv.html"
+       data-categories="Brand Web">
+      <div class="row-num">08</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80&fit=crop" alt="ICLAUDIUS.TV" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA">Brand</span>
+          <span class="row-tag" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA">Logo Design</span>
+          <span class="row-tag" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA">Film</span>
+        </div>
+        <div class="row-title">ICLAUDIUS.TV</div>
+        <div class="row-desc">Complete brand identity and digital portfolio for an international film director — concept to live.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">AI · Photoshop · WordPress</span>
+          <span class="row-meta-item">6 weeks</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+    <a class="project-row reveal" href="projects/samsung-s26-preorder.html"
+       data-categories="Web Research">
+      <div class="row-num">09</div>
+      <div class="row-img-wrap">
+        <img class="row-img" src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&q=80&fit=crop" alt="Samsung S26 Pre-Order" loading="lazy">
+      </div>
+      <div class="row-info">
+        <div class="row-tags">
+          <span class="row-tag" style="background:#EBF3FF;color:#1C6BEB;border-color:#BFDBFE">UX Research</span>
+          <span class="row-tag" style="background:#EBF3FF;color:#1C6BEB;border-color:#BFDBFE">Analytics</span>
+          <span class="row-tag" style="background:#EBF3FF;color:#1C6BEB;border-color:#BFDBFE">E-Commerce</span>
+        </div>
+        <div class="row-title">Samsung Galaxy S26 Pre-Order</div>
+        <div class="row-desc">Behavioural analytics and UX research to optimise the device installment purchase journey.</div>
+        <div class="row-meta">
+          <span class="row-meta-item">Heatmap Analysis · Funnel Data · UX Research</span>
+        </div>
+      </div>
+      <span class="row-cta">View Case Study <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></span>
+    </a>
+
+  </div>
+</div>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.header-inner > *', {
+    opacity:0, y:30, stagger:0.15, duration:0.8, ease:'power3.out', delay:0.2
+  });
+
+  gsap.utils.toArray('.reveal').forEach((el, i) => {
+    gsap.to(el, {
+      opacity:1, y:0, duration:0.7, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 90%', toggleActions:'play none none none'},
+      delay: i * 0.04
+    });
+  });
+
+  // Filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('.project-row');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      rows.forEach(row => {
+        const cats = row.dataset.categories || '';
+        const show = filter === 'all' || cats.includes(filter);
+        gsap.to(row, {
+          opacity: show ? 1 : 0.2,
+          scale: show ? 1 : 0.97,
+          duration: 0.35, ease: 'power2.out'
+        });
+        row.style.pointerEvents = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
